@@ -318,14 +318,14 @@ public class ITab_Pawn_Psycasts : ITab
             else
             {
                 Widgets.DrawRectFast(rect, new Color(0f, 0f, 0f, useAltBackgrounds ? 0.7f : 0.55f));
-                if (hediff.points >= 1 || devMode)
+                if (hediff.unlockedPaths.Count == 0 || hediff.points >= 1 || devMode)
                 {
                     var centerRect = rect.CenterRect(new Vector2(140f, 30f));
                     if (devMode || def.CanPawnUnlock(pawn))
                     {
                         if (Widgets.ButtonText(centerRect, "VPE.Unlock".Translate()))
                         {
-                            if (!devMode) hediff.SpentPoints();
+                            if (!devMode && hediff.unlockedPaths.Count > 0) hediff.SpentPoints();
                             hediff.UnlockPath(def);
                         }
                     }
